@@ -1,0 +1,20 @@
+[
+    {
+        "absolute_humidity": 21,
+        "app_name": "NatureRemoTest",
+        "brightness": 241,
+        "date_time": "2020-08-28 13:30:04",
+        "date_time_num": 20200828133004,
+        "humidity": 80,
+        "temperature": 28
+    },
+    {
+        "absolute_humidity": 22,
+        "app_name": "NatureRemoTest",
+        "brightness": 241,
+        "date_time": "2020-08-28 15:00:04",
+        "date_time_num": 20200828150004,
+        "humidity": 80,
+        "temperature": 28.59
+    }
+]

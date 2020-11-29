@@ -30,9 +30,9 @@ export async function hello(event:APIGatewayProxyEvent, _context:Context):Promis
   // const name: string = event.queryStringParameters['name'];
   let response: APIGatewayProxyResult = null;
 
-  const items:DocumentClient.ItemList = await main();
   const dateTime:string = getDate();
   const nodeVer: string = getNodeJsVersion();
+  const items:DocumentClient.ItemList = await main();
 
   response = {
     statusCode: 200,
@@ -66,13 +66,17 @@ export async function hello(event:APIGatewayProxyEvent, _context:Context):Promis
 
 export async function main():Promise<DocumentClient.ItemList> {
 
-  const documentClient: DocumentClient = new AWS.DynamoDB.DocumentClient();
+  const documentClient: DocumentClient = new AWS.DynamoDB.DocumentClient({
+    region: 'localhost',
+    endpoint: 'http://localhost:8000',
+  });
+
   const param: DocumentClient.QueryInput = {
     TableName: 'nature-remo-events-history',
     KeyConditionExpression: 'app_name = :app_name and date_time_num = :date_time_num',
     ExpressionAttributeValues: {
       ':app_name': 'NatureRemoTest',
-      ':date_time_num': 20201122073504
+      ':date_time_num': 20200828133004
     }
   };
 
