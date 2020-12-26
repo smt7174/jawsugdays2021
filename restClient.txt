@@ -1,1 +1,2 @@
-GET https://bevw4lnpi9.execute-api.ap-northeast-1.amazonaws.com/dev/hello?name=Guy
+# GET https://bevw4lnpi9.execute-api.ap-northeast-1.amazonaws.com/dev/hello?name=Guy
+http://localhost:3000/dev/hello

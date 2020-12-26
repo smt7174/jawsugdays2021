@@ -49,13 +49,15 @@ const serverlessConfiguration: Serverless = {
 
   },
   // Add the serverless-webpack plugin
-  // serverless-dynamodb-local must be avove than serverless-offline
+  // serverless-dynamodb-local must be above than serverless-offline
   // serverless-dynamodb-local has to be installed by 'serverlss dynamodb install --localPath ./bin'
   // if installed without --localPath option, spawn java ENOENT Error Occurs.
   // https://github.com/99x/serverless-dynamodb-local/issues/195
+  // https://github.com/99x/serverless-dynamodb-local/issues/195#issuecomment-455587789
   plugins: [
     'serverless-webpack',
     'serverless-dynamodb-local',
+    'serverless-s3-local',
     'serverless-offline'
   ],
   provider: {
