@@ -32,21 +32,32 @@ const serverlessConfiguration: Serverless = {
         seed: true,
         convertEmptyValues: true
       },
-
       seed: {
-        nature_remo: {
+        tower_of_druaga: {
           sources: [
             {
-              table: 'nature-remo-events-history',
-              sources: ['./nature_remo.json']
+              table: 'tower-of-druaga',
+              sources: ['./tower_of_druaga.json']
             }
           ]
-        }
+        },
+        // nature_remo: {
+        //   sources: [
+        //     {
+        //       table: 'nature-remo-events-history',
+        //       sources: ['./nature_remo.json']
+        //     }
+        //   ]
+        // },
       }
       // Uncomment only if you already have a DynamoDB running locally
       // noStart: true
+    },
+    s3: {
+      host: 'localhost',
+      directory: './buckets',
+      port: 4569
     }
-
   },
   // Add the serverless-webpack plugin
   // serverless-dynamodb-local must be above than serverless-offline
@@ -77,6 +88,11 @@ const serverlessConfiguration: Serverless = {
         Effect: 'Allow',
         Action: 'dynamodb:*',
         Resource: '*'
+      },
+      {
+        Effect: 'Allow',
+        Action: 's3:*',
+        Resource: '*'
       }
     ]
   },
@@ -95,34 +111,67 @@ const serverlessConfiguration: Serverless = {
   },
   resources: {
     Resources:{
-      usersTable: {
+      // usersTable: {
+      //   Type: 'AWS::DynamoDB::Table',
+      //   Properties: {
+      //     TableName: 'nature-remo-events-history',
+      //     AttributeDefinitions: [
+      //       {
+      //         AttributeName: 'app_name',
+      //         AttributeType: 'S'
+      //       },
+      //       {
+      //         AttributeName: 'date_time_num',
+      //         AttributeType: 'N'
+      //       }
+      //     ],
+      //     KeySchema: [
+      //       {
+      //         AttributeName: 'app_name',
+      //         KeyType: 'HASH'
+      //       },
+      //       {
+      //         AttributeName: 'date_time_num',
+      //         KeyType: 'RANGE'
+      //       }
+      //     ],
+      //     ProvisionedThroughput: {
+      //       ReadCapacityUnits: 1,
+      //       WriteCapacityUnits: 1
+      //     }
+      //   }
+      // },
+      TowerOfDruagaTable: {
         Type: 'AWS::DynamoDB::Table',
         Properties: {
-          TableName: 'nature-remo-events-history',
-          AttributeDefinitions: [
+          TableName: 'tower-of-druaga',
+          AttributeDefinitions:[
             {
-              AttributeName: 'app_name',
-              AttributeType: 'S'
+              AttributeName: "Type",
+              AttributeType: "S"
             },
             {
-              AttributeName: 'date_time_num',
-              AttributeType: 'N'
+              AttributeName: "Floor",
+              AttributeType: "N"
             }
           ],
-          KeySchema: [
+          KeySchema:[
             {
-              AttributeName: 'app_name',
-              KeyType: 'HASH'
+              AttributeName: "Type",
+              KeyType: "HASH"
             },
             {
-              AttributeName: 'date_time_num',
-              KeyType: 'RANGE'
+              AttributeName: "Floor",
+              KeyType: "RANGE"
             }
           ],
-          ProvisionedThroughput: {
-            ReadCapacityUnits: 1,
-            WriteCapacityUnits: 1
-          }
+          BillingMode: 'PAY_PER_REQUEST'
+        }
+      },
+      SuzukimaS3LocalBucketTest: {
+        Type: 'AWS::S3::Bucket',
+        Properties: {
+          BucketName: 'suzukima-s3-local-test-bucket'
         }
       }
     }
