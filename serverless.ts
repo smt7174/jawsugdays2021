@@ -1,5 +1,6 @@
 import type { Serverless } from 'serverless/aws';
 
+// serverless offlineなど
 const serverlessConfiguration: Serverless = {
   /*
   service: {
