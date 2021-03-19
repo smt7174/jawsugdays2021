@@ -3,6 +3,11 @@
 
 https://jawsdays2021.jaws-ug.jp/
 
+## 参考資料(登壇資料)
+https://www.slideshare.net/MasakiSuzuki3/20210320jawsdays2021reconnect
+
+※Serverless DynamoDB Local, Serverless S3 Localの一部情報について「参考情報その1～2」にまとめてありますので、何かあった際に参照ください。
+
 ## 重要なファイル一覧
 - bucket/jawsdays2021：serverless-s3-localで使用するS3バケットフォルダ。
 - scripts/install-dynamo.js：「npm run install-dynamo」コマンドで使用するインストール用jsファイル。
@@ -25,7 +30,7 @@ https://jawsdays2021.jaws-ug.jp/
 ※動作確認はしていますが、動作させる場合は自己責任でお願いします。
 
 ## その他
-その他事項は、ソース内のコメントを参照してください。
+その他事項は、ソース内のコメントや先述の登壇資料を参照してください。
 
 ## 注意点
 - 動作には、Serverless Framework, 及びJestも必要です
