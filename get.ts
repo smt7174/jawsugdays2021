@@ -37,8 +37,8 @@ export async function main():Promise<APIGatewayProxyResult> {
     const dc:DocumentClient = createDocumentClientObject();
     const s3:S3 = createS3Object();
 
-    await getDynamoDBDescribe()
-    await putDynamoDBData(dc)
+    // await getDynamoDBDescribe()
+    // await putDynamoDBData(dc)
     await putS3ObjectContents(s3);
 
     const promises:any[] = [scanDynamoDbItems(dc), getS3ObjectContents(s3)];
