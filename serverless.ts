@@ -93,13 +93,21 @@ const serverlessConfiguration: Serverless = {
         }
       ]
     },
-    dummy: {
+    trigger: {
       handler: 'trigger.handler',
       events: [
         {
           s3: {
             bucket: 'jawsugdays2021',
             event: 's3:ObjectCreated:*'
+          }
+        },
+        {
+          stream: {
+            type: 'dynamodb',
+            arn: {
+              "Ref": ['TowerOfDruagaTableStreamArn']
+            }
           }
         }
       ]
@@ -142,7 +150,10 @@ const serverlessConfiguration: Serverless = {
               KeyType: "RANGE"
             }
           ],
-          BillingMode: 'PAY_PER_REQUEST'
+          BillingMode: 'PAY_PER_REQUEST',
+          StreamSpecification: {
+            StreamViewType: 'NEW_AND_OLD_IMAGES'
+          }
         }
       },
     }

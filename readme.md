@@ -16,7 +16,9 @@ https://www.slideshare.net/MasakiSuzuki3/20210320jawsdays2021reconnect
 - tower-of-druaga-jawadays.json：DynamoDB Localの初期データ(seed)設定です。
 - get.test.js：テスト用ファイルです。
 - get.ts：テスト対象のLambda本体です。
-- trigger.ts：get.tsなどでbucket/jawsdays2021バケットにキーを追加した際に、S3トリガで起動するLambdaです。(get.tsのputS3ObjectContentsを実施することでキーを追加します)
+- trigger.ts：get.tsなどでbucket/jawsdays2021バケットにキーを追加した際に、S3トリガで起動するLambdaです。
+    - get.tsのputS3ObjectContentsを実施することでキーを追加します。
+    - DynamoDBにもトリガ設定されてますが、うまく動きませんでした。(ServerlessではないDynamoDB- Localを初めから起動している状態でLatestStreamArnの値を指定すればうまく動くかも)
 
 ## ソースについて
 このソースは、主にaws-sdk-mock, Serverless Offline, Serverless DynamoDB Local, Serverless S3 Localを使用する際のソースの参考としてください。

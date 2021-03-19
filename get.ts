@@ -37,8 +37,8 @@ export async function main():Promise<APIGatewayProxyResult> {
     const dc:DocumentClient = createDocumentClientObject();
     const s3:S3 = createS3Object();
 
-    // await getDynamoDBDescribe()
-    // await putDynamoDBData()
+    await getDynamoDBDescribe()
+    await putDynamoDBData(dc)
     await putS3ObjectContents(s3);
 
     const promises:any[] = [scanDynamoDbItems(dc), getS3ObjectContents(s3)];
@@ -137,7 +137,6 @@ export function createResponse(_code:number, _message:string, _items?:DocumentCl
 }
 
 // DynamoDBテーブルの情報を取得する
-/*
 export async function getDynamoDBDescribe():Promise<void> {
 
   const dynamo = new AWS.DynamoDB({
@@ -153,10 +152,8 @@ export async function getDynamoDBDescribe():Promise<void> {
   console.info(`[describe] ${JSON.stringify(data)}`);
   return;
 }
-*/
 
 // DynamoDBにデータを作成する用の関数
-/*
 export async function putDynamoDBData(_dc:DocumentClient):Promise<void> {
 
   const item:DocumentClient.PutItemInputAttributeMap = {
@@ -182,7 +179,6 @@ export async function putDynamoDBData(_dc:DocumentClient):Promise<void> {
   await _dc.put(param).promise();
   return;
 }
-*/
 
 // S3バケットにファイルを作成する用の関数
 export async function putS3ObjectContents(_s3:S3):Promise<void> {
