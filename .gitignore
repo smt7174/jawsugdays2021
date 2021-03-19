@@ -7,7 +7,6 @@ jspm_packages
 
 # Webpack directories
 .webpack
+
 .dynamodb
-buckets
-buckets/**
 package-lock.json

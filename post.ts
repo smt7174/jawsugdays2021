@@ -20,7 +20,7 @@ const TABLE_PARTITION_KEY = "treasure";
 const BUCKET_NAME = "suzukima-s3-local-test-bucket";
 const FILE_NAME = `${TABLE_NAME}.json`;
 
-export async function hello(event:APIGatewayProxyEvent, _context:Context):Promise<APIGatewayProxyResult>{
+export async function handler(event:APIGatewayProxyEvent, _context:Context):Promise<APIGatewayProxyResult>{
   console.log(`[event] ${JSON.stringify(event)}`);
   const floor:number = parseInt(event.queryStringParameters['floor']);
 

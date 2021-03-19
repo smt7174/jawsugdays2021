@@ -2,15 +2,7 @@ import type { Serverless } from 'serverless/aws';
 
 // serverless offlineなど
 const serverlessConfiguration: Serverless = {
-  /*
-  service: {
-    name: 'serverless-typescript-test',
-    // app and org for use with dashboard.serverless.com
-    // app: your-app-name,
-    // org: your-org-name,
-  },
-  */
-  service: 'serverless-typescript-test',
+  service: 'jawsugdays-2021-sample',
   frameworkVersion: '2',
   custom: {
     webpack: {
@@ -37,26 +29,18 @@ const serverlessConfiguration: Serverless = {
         tower_of_druaga: {
           sources: [
             {
-              table: 'tower-of-druaga',
-              sources: ['./tower_of_druaga.json']
+              table: 'tower-of-druaga-jawsugdays',
+              sources: ['./tower-of-druaga-jawsugdays.json']
             }
           ]
         },
-        // nature_remo: {
-        //   sources: [
-        //     {
-        //       table: 'nature-remo-events-history',
-        //       sources: ['./nature_remo.json']
-        //     }
-        //   ]
-        // },
       }
       // Uncomment only if you already have a DynamoDB running locally
       // noStart: true
     },
     s3: {
       host: 'localhost',
-      directory: './buckets',
+      directory: './bucket',
       port: 4569
     }
   },
@@ -98,54 +82,35 @@ const serverlessConfiguration: Serverless = {
     ]
   },
   functions: {
-    hello: {
-      handler: 'handler.hello',
+    get: {
+      handler: 'get.handler',
       events: [
         {
           http: {
             method: 'get',
-            path: 'hello',
+            path: 'get',
           }
         }
       ]
-    }
+    },
+    // post: {
+    //   handler: 'post.handler',
+    //   events: [
+    //     {
+    //       http: {
+    //         method: 'post',
+    //         path: 'post',
+    //       }
+    //     }
+    //   ]
+    // }
   },
   resources: {
     Resources:{
-      // usersTable: {
-      //   Type: 'AWS::DynamoDB::Table',
-      //   Properties: {
-      //     TableName: 'nature-remo-events-history',
-      //     AttributeDefinitions: [
-      //       {
-      //         AttributeName: 'app_name',
-      //         AttributeType: 'S'
-      //       },
-      //       {
-      //         AttributeName: 'date_time_num',
-      //         AttributeType: 'N'
-      //       }
-      //     ],
-      //     KeySchema: [
-      //       {
-      //         AttributeName: 'app_name',
-      //         KeyType: 'HASH'
-      //       },
-      //       {
-      //         AttributeName: 'date_time_num',
-      //         KeyType: 'RANGE'
-      //       }
-      //     ],
-      //     ProvisionedThroughput: {
-      //       ReadCapacityUnits: 1,
-      //       WriteCapacityUnits: 1
-      //     }
-      //   }
-      // },
       TowerOfDruagaTable: {
         Type: 'AWS::DynamoDB::Table',
         Properties: {
-          TableName: 'tower-of-druaga',
+          TableName: 'tower-of-druaga-jawsugdays',
           AttributeDefinitions:[
             {
               AttributeName: "Type",
@@ -169,12 +134,6 @@ const serverlessConfiguration: Serverless = {
           BillingMode: 'PAY_PER_REQUEST'
         }
       },
-      SuzukimaS3LocalBucketTest: {
-        Type: 'AWS::S3::Bucket',
-        Properties: {
-          BucketName: 'suzukima-s3-local-test-bucket'
-        }
-      }
     }
   }
 }
