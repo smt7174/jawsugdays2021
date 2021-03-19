@@ -37,7 +37,7 @@ export async function main():Promise<APIGatewayProxyResult> {
     const dc:DocumentClient = createDocumentClientObject();
     const s3:S3 = createS3Object();
 
-    // await putS3ObjectContents(s3);
+    await putS3ObjectContents(s3);
 
     const promises:any[] = [scanDynamoDbItems(dc), getS3ObjectContents(s3)];
     const results: any[] = await Promise.all(promises);
@@ -134,7 +134,6 @@ export function createResponse(_code:number, _message:string, _items?:DocumentCl
   return response;
 }
 
-/*
 // S3バケットにファイルを作成する用の関数
 export async function putS3ObjectContents(_s3:S3):Promise<void> {
 
@@ -179,7 +178,7 @@ export async function putS3ObjectContents(_s3:S3):Promise<void> {
 
   const param: S3.PutObjectRequest = {
     Bucket: BUCKET_NAME,
-    Key: "put_" + FILE_NAME,
+    Key: FILE_NAME,
     Body: JSON.stringify(contents)
   };
 
@@ -189,7 +188,6 @@ export async function putS3ObjectContents(_s3:S3):Promise<void> {
   console.log('puS3ObjectContents data: ' + JSON.stringify(data));
   return;
 }
-*/
 
 export const exportFuncs = {
   scanDynamoDbItems:scanDynamoDbItems,

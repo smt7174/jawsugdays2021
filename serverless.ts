@@ -93,6 +93,17 @@ const serverlessConfiguration: Serverless = {
         }
       ]
     },
+    dummy: {
+      handler: 'trigger.handler',
+      events: [
+        {
+          s3: {
+            bucket: 'jawsugdays2021',
+            event: 's3:ObjectCreated:*'
+          }
+        }
+      ]
+    },
     // post: {
     //   handler: 'post.handler',
     //   events: [
