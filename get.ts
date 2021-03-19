@@ -37,6 +37,8 @@ export async function main():Promise<APIGatewayProxyResult> {
     const dc:DocumentClient = createDocumentClientObject();
     const s3:S3 = createS3Object();
 
+    // await getDynamoDBDescribe()
+    // await putDynamoDBData()
     await putS3ObjectContents(s3);
 
     const promises:any[] = [scanDynamoDbItems(dc), getS3ObjectContents(s3)];
@@ -133,6 +135,54 @@ export function createResponse(_code:number, _message:string, _items?:DocumentCl
 
   return response;
 }
+
+// DynamoDBテーブルの情報を取得する
+/*
+export async function getDynamoDBDescribe():Promise<void> {
+
+  const dynamo = new AWS.DynamoDB({
+      endpoint: 'http://localhost:8000'
+    }
+  )
+
+  const param: DocumentClient.DescribeTableInput = {
+    TableName: TABLE_NAME
+  };
+
+  const data = await dynamo.describeTable(param).promise();
+  console.info(`[describe] ${JSON.stringify(data)}`);
+  return;
+}
+*/
+
+// DynamoDBにデータを作成する用の関数
+/*
+export async function putDynamoDBData(_dc:DocumentClient):Promise<void> {
+
+  const item:DocumentClient.PutItemInputAttributeMap = {
+      Type: "treasure",
+      Floor: 56,
+      Detail: [
+        {
+          Condition: "呪文をアーマーで受ける",
+          Effect: "なし",
+          Memo: "宝箱は出現するが、中身が空っぽ",
+          Name: "なし"
+        }
+      ]
+    };
+
+  const param: DocumentClient.Put = {
+    TableName: TABLE_NAME,
+    Item: item,
+  };
+
+  console.log('putDynamoDBData params: ' + JSON.stringify(param));
+
+  await _dc.put(param).promise();
+  return;
+}
+*/
 
 // S3バケットにファイルを作成する用の関数
 export async function putS3ObjectContents(_s3:S3):Promise<void> {
